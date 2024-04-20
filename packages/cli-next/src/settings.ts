@@ -32,7 +32,7 @@ export const GLOBAL_REACT_DOM_SERVER_VARIABLE_NAME = '_airtableReactDOMServer';
 export const GLOBAL_RUN_BLOCK_FUNCTION_NAME = '_airtableRunBlock';
 export const GLOBAL_BLOCK_CODE_VERSION_VARIABLE_NAME = '_airtableBlockCodeVersion';
 
-export const BLOCK_REQUEST_BODY_LIMIT = 5.2 * 1024 * 1024; 
+export const BLOCK_REQUEST_BODY_LIMIT = 5.2 * 1024 * 1024;
 
 /** The name of the blocks sdk. */
-export const SDK_PACKAGE_NAME = '@airtable/blocks';
+export const SDK_PACKAGE_NAME = '@aircraftdev/blocks';

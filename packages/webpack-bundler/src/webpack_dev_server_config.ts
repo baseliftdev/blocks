@@ -12,7 +12,7 @@ export function createWebpackDevServerConfig({port}: WebpackDevServerOptions): C
     return {
         port,
         injectClient: false,
-        hot: false,
+        hot: true,
         disableHostCheck: true,
         clientLogLevel: 'silent',
         ...unspecifiedConfiguration,
