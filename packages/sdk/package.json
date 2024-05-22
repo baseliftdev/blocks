@@ -1,6 +1,6 @@
 {
     "name": "@baselift/blocks",
-    "version": "1.0.1",
+    "version": "1.1.5",
     "description": "Airtable Blocks SDK",
     "repository": {
         "type": "git",
