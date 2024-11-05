@@ -65,8 +65,8 @@ class Table extends AbstractModel<TableData, WatchableTableKey> {
         super(sdk, tableId);
         this._parentBase = parentBase;
         this._recordStore = recordStore;
-        this._viewModelsById = {}; 
-        this._fieldModelsById = {}; 
+        this._viewModelsById = {};
+        this._fieldModelsById = {};
         this._cachedFieldNamesById = null;
 
         this.__tableOrViewQueryResultPool = new ObjectPool(TableOrViewQueryResult);
@@ -1254,6 +1254,13 @@ class Table extends AbstractModel<TableData, WatchableTableKey> {
         const recordIds = await this.createRecordsAsync([{fields}]);
         return recordIds[0];
     }
+    async createRecordWithIdAsync(
+        fields: ObjectMap<FieldId | string, unknown> = {},
+        id: RecordId,
+    ): Promise<RecordId> {
+        const recordIds = await this.createRecordsWithIdsAsync([{id, fields}]);
+        return recordIds[0];
+    }
 
     /**
      * Checks whether the current user has permission to create the specified record.
@@ -1436,6 +1443,33 @@ class Table extends AbstractModel<TableData, WatchableTableKey> {
 
         return recordsToCreate.map(record => record.id);
     }
+    async createRecordsWithIdsAsync(
+        records: ReadonlyArray<{id: RecordId; fields: ObjectMap<FieldId | string, unknown>}>,
+    ): Promise<Array<RecordId>> {
+        const recordsToCreate = records.map(recordDef => {
+            let fields: ObjectMap<FieldId | string, unknown>;
+            if ('fields' in recordDef) {
+                fields = recordDef.fields;
+            } else {
+                throw spawnError(
+                    'Invalid record format. Please define field mappings using a `fields` key for each record definition object',
+                );
+            }
+            return {
+                id: recordDef.id,
+                cellValuesByFieldId: this._cellValuesByFieldIdOrNameToCellValuesByFieldId(fields),
+            };
+        });
+
+        await this._sdk.__mutations.applyMutationAsync({
+            type: MutationTypes.CREATE_MULTIPLE_RECORDS,
+            tableId: this.id,
+            records: recordsToCreate,
+            opts: {parseDateCellValueInColumnTimeZone: true},
+        });
+
+        return recordsToCreate.map(record => record.id);
+    }
     /**
      * Checks whether the current user has permission to create the specified records.
      *
@@ -1587,7 +1621,7 @@ class Table extends AbstractModel<TableData, WatchableTableKey> {
         return this._sdk.__mutations.checkPermissionsForMutation({
             type: MutationTypes.CREATE_SINGLE_FIELD,
             tableId: this.id,
-            id: undefined, 
+            id: undefined,
             name,
             config: type
                 ? {
