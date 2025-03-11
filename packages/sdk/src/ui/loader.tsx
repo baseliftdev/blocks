@@ -1,5 +1,4 @@
 /** @module @airtable/blocks/ui: Loader */ /** */
-import PropTypes from 'prop-types';
 import {cx} from 'emotion';
 import * as React from 'react';
 import {compose} from '@styled-system/core';
@@ -44,9 +43,9 @@ export const loaderStylePropTypes = {
  */
 interface LoaderProps extends LoaderStyleProps {
     /** The color of the loading spinner. Defaults to `'#888'` */
-    fillColor: string;
+    fillColor?: string;
     /** A scalar for the loading spinner. Increasing the scale increases the size of the loading spinner. Defaults to `0.3`. */
-    scale: number;
+    scale?: number;
     /** Additional class names to apply to the loading spinner. */
     className?: string;
     /** Additional styles to apply to the loading spinner. */
@@ -62,7 +61,7 @@ interface LoaderProps extends LoaderStyleProps {
  * @component
  */
 const Loader = (props: LoaderProps) => {
-    const {fillColor, scale, className, style, ...styleProps} = props;
+    const {fillColor = '#888', scale = 0.3, className, style, ...styleProps} = props;
     const classNameForStyleProps = useStyledSystem<LoaderStyleProps>(styleProps, styleParser);
 
     return (
@@ -96,19 +95,6 @@ const Loader = (props: LoaderProps) => {
             </g>
         </svg>
     );
-};
-
-Loader.propTypes = {
-    fillColor: PropTypes.string.isRequired,
-    scale: PropTypes.number.isRequired,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    ...loaderStylePropTypes,
-};
-
-Loader.defaultProps = {
-    fillColor: '#888',
-    scale: 0.3,
 };
 
 export default Loader;
