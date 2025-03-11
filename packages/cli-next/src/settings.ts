@@ -35,4 +35,4 @@ export const GLOBAL_BLOCK_CODE_VERSION_VARIABLE_NAME = '_airtableBlockCodeVersio
 export const BLOCK_REQUEST_BODY_LIMIT = 5.2 * 1024 * 1024;
 
 /** The name of the blocks sdk. */
-export const SDK_PACKAGE_NAME = '@aircraftdev/blocks';
+export const SDK_PACKAGE_NAME = '@baselift/blocks';
