@@ -66,6 +66,7 @@ const Loader = (props: LoaderProps) => {
 
     return (
         <svg
+            data-slot="icon"
             width={ORIGINAL_SIZE * scale}
             height={ORIGINAL_SIZE * scale}
             viewBox={`0 0 ${ORIGINAL_SIZE} ${ORIGINAL_SIZE}`}
