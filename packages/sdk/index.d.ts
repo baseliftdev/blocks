@@ -11,3 +11,4 @@ export const reload: Sdk['reload'];
 
 export const cursor: Sdk['cursor'];
 export const session: Sdk['session'];
+export const idGenerator: Sdk['idGenerator'];

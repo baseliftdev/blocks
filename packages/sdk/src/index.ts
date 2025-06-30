@@ -16,6 +16,7 @@ export let settingsButton: Sdk['settingsButton'];
 export let undoRedo: Sdk['undoRedo'];
 export let viewport: Sdk['viewport'];
 export let unstable_fetchAsync: Sdk['unstable_fetchAsync'];
+export let idGenerator: Sdk['idGenerator'];
 
 export let cursor: Sdk['cursor'];
 Object.defineProperty(module.exports, 'cursor', {
@@ -77,6 +78,7 @@ export function __reset() {
         undoRedo,
         viewport,
         unstable_fetchAsync,
+        idGenerator,
     } = __sdk);
 
     __injectSdkIntoCreateAggregators(__sdk);

@@ -382,6 +382,11 @@ class Record extends AbstractModel<RecordData, WatchableRecordKey> {
     get commentCount(): number {
         return this._data.commentCount;
     }
+
+    get cellValuesByFieldId() {
+        return this._data.cellValuesByFieldId;
+    }
+
     /**
      * The created time of this record.
      *
@@ -402,7 +407,6 @@ class Record extends AbstractModel<RecordData, WatchableRecordKey> {
         const {cellValuesByFieldId, commentCount} = dirtyPaths;
 
         if (cellValuesByFieldId && !isObjectEmpty(cellValuesByFieldId)) {
-
             this._onChange(WatchableRecordKeys.cellValues, Object.keys(cellValuesByFieldId));
 
             if (cellValuesByFieldId[this.parentTable.primaryField.id]) {

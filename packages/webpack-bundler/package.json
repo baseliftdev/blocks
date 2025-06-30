@@ -1,5 +1,5 @@
 {
-    "name": "@airtable/blocks-webpack-bundler",
+    "name": "@baselift/blocks-webpack-bundler",
     "description": "Webpack bundler for @airtable/blocks-cli",
     "version": "0.0.3",
     "homepage": "https://airtable.com/developers/blocks",
@@ -49,7 +49,6 @@
         "ci": "echo '--- webpack-bundler' && (cd ../cli-next && yarn build) && yarn test",
         "lint": "ESLINT_USE_FLAT_CONFIG=false eslint . --ext .ts --config .eslintrc.js",
         "pack:typescript": "rm -rf dist && rm -f tsconfig.tsbuildinfo && tsc",
-        "prepack": "yarn install && yarn run pack:typescript",
         "test": "yarn lint && yarn test:types && yarn test:unit",
         "test:cov-report": "nyc --reporter=text --reporter=html --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
         "test:types": "tsc --project tsconfig-testing.json",
